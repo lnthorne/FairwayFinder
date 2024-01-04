@@ -2,8 +2,13 @@ import {IUserLoginPayload} from '@interfaces/user.type';
 import React, {useState} from 'react';
 import {View, TextInput, Button, StyleSheet, Text} from 'react-native';
 import {Login} from '../utils/auth';
+import {NavigationProp} from '@react-navigation/native';
 
-const LoginScreen = () => {
+interface ILoginProps {
+  navigation: NavigationProp<any>;
+}
+
+const LoginScreen: React.FC<ILoginProps> = ({navigation}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -14,9 +19,17 @@ const LoginScreen = () => {
       username,
       password,
     };
+    try {
+      const response = await Login(userData);
 
-    const response = await Login(userData);
-    console.log('Response:', response);
+      if (response.error === null) {
+        navigation.navigate('Home');
+      }
+
+      console.log('Response:', response);
+    } catch (err) {
+      console.error('Error sending login request', err);
+    }
   };
 
   return (
@@ -39,6 +52,11 @@ const LoginScreen = () => {
       />
 
       <Button title="Login" onPress={handleLogin} />
+
+      <Button
+        title="Go to Register"
+        onPress={() => navigation.navigate('Register')}
+      />
     </View>
   );
 };
