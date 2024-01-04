@@ -21,6 +21,11 @@ const LoginScreen: React.FC<ILoginProps> = ({navigation}) => {
     };
     try {
       const response = await Login(userData);
+
+      if (response.error === null) {
+        navigation.navigate('Home');
+      }
+
       console.log('Response:', response);
     } catch (err) {
       console.error('Error sending login request', err);

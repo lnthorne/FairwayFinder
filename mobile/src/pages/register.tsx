@@ -32,6 +32,11 @@ const RegisterScreen: React.FC<IRegisterProps> = ({navigation}) => {
 
     try {
       const response = await Register(userData);
+
+      if (response.error === null) {
+        navigation.navigate('Home');
+      }
+
       console.log(response);
     } catch (err) {
       console.error('Error sending registration', err);
