@@ -1,6 +1,6 @@
 import {IUserLoginPayload, IUserRegisterPayload} from '@interfaces/user.type';
 import {CallAPI, Endpoint, METHOD, TOKEN_STORAGE} from './endpoints';
-import AsyncStorage from '@react-native-async-storage/async-storage/lib/typescript/AsyncStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export async function Register(userData: IUserRegisterPayload) {
   const response = await CallAPI({

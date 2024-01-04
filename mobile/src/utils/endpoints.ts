@@ -1,7 +1,8 @@
-import AsyncStorage from '@react-native-async-storage/async-storage/lib/typescript/AsyncStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios, {Method} from 'axios';
+// import {BASE_URL} from '@env';
 
-const baseURL = process.env.BASE_URL;
+const baseURL = 'http://localhost:3000';
 
 export enum Endpoint {
   LOGIN = '/auth/login',
@@ -43,6 +44,8 @@ export async function CallAPI({
   } catch (e) {
     console.error('Failed to fetch the token from storage:', e);
   }
+
+  console.log('base', baseURL);
 
   try {
     const response = await axios({
