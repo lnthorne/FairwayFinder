@@ -18,8 +18,8 @@ export interface IUserLoginPayload {
 }
 
 export interface IUserRegisterPayload {
-	firstname: string;
-	lastname: string;
+	firstName: string;
+	lastName: string;
 	username: string;
 	email: string;
 	password: string;
