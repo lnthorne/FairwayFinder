@@ -23,8 +23,7 @@ This app enables users to search and filter golf tee times. It's a React Native 
 
 1. **Clone the Repository**
 2. **Install Dependencies**
-   In the `mobile` directory:
-   In the `server` directory:
+   In the `mobile` directory and in the `server` directory
 
 ### Running the Application
 
