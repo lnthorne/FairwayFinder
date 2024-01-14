@@ -25,7 +25,7 @@ const HomeScreen: React.FC<IHomeProps> = ({navigation}) => {
       lng: '-112.074036',
     });
 
-    console.warn(fuck.data.data.courses);
+    console.warn(fuck.data.courses);
   };
 
   const handleLogout = async () => {

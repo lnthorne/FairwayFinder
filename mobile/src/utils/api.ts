@@ -13,9 +13,10 @@ export async function GetCourses(params: ICourseQueryParameters) {
 
   if (response.error !== null) {
     console.error(response.error);
+    return {data: null, error: response.error};
   }
 
-  return response;
+  return response.data;
 }
 
 export async function getCourseDetails(params: ICourseDetailsQueryParameters) {
@@ -27,7 +28,8 @@ export async function getCourseDetails(params: ICourseDetailsQueryParameters) {
 
   if (response.error !== null) {
     console.error(response.error);
+    return {data: null, error: response.error};
   }
 
-  return response;
+  return response.data;
 }
