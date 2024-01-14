@@ -1,33 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {Button, Text, View} from 'react-native';
+import React from 'react';
+import {Button, View} from 'react-native';
 import {Logout} from '../utils/auth';
 import {NavigationProp, ParamListBase} from '@react-navigation/native';
-import {GetCourses} from '../utils/api';
+import LocationComponent from './location.search';
 
 interface IHomeProps {
   navigation: NavigationProp<ParamListBase>;
 }
 
 const HomeScreen: React.FC<IHomeProps> = ({navigation}) => {
-  const [data, setData] = useState();
-  // useEffect(() => {
-  //   const test = async () => {
-  //
-  //   };
-
-  //   test();
-  // }, []);
-
-  const handleCourseTest = async () => {
-    const fuck = await GetCourses({
-      radius: '20',
-      lat: '33.448376',
-      lng: '-112.074036',
-    });
-
-    console.warn(fuck.data.courses);
-  };
-
   const handleLogout = async () => {
     try {
       const response = await Logout();
@@ -43,9 +24,8 @@ const HomeScreen: React.FC<IHomeProps> = ({navigation}) => {
 
   return (
     <View>
-      <Text>Home Screen</Text>
+      <LocationComponent />
       <Button title="Logout" onPress={handleLogout} />
-      <Button title="Courses" onPress={handleCourseTest} />
     </View>
   );
 };
