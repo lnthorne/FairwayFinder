@@ -43,31 +43,26 @@ export async function CallAPI({
   data = {},
   params = {},
 }: APICallProps) {
-  // let token;
-  // try {
-  //   token = await AsyncStorage.getItem(TOKEN_STORAGE);
-  // } catch (e) {
-  //   console.error('Failed to fetch the token from storage:', e);
-  // }
-
-  // console.log('PARAMS', params, 'TOKEN', token);
+  let token;
+  try {
+    token = await AsyncStorage.getItem(TOKEN_STORAGE);
+  } catch (e) {
+    console.error('Failed to fetch the token from storage:', e);
+  }
 
   try {
     const response = await apiClient({
       method,
       url: endpoint,
-      // data,
+      data: method === METHOD.GET ? undefined : data,
       params,
-      // headers: token ? {Authorization: `Bearer ${token}`} : undefined,
+      headers: token ? {Authorization: `Bearer ${token}`} : undefined,
     });
-
-    console.log(response);
 
     return {data: response.data, error: null};
   } catch (error) {
     const apiError = error as APIError;
     console.error('Error calling API', apiError);
-    console.log('Fuck', baseURL, endpoint, params);
 
     return {
       data: null,

@@ -24,6 +24,8 @@ const HomeScreen: React.FC<IHomeProps> = ({navigation}) => {
       lat: '33.448376',
       lng: '-112.074036',
     });
+
+    console.warn(fuck.data.data.courses);
   };
 
   const handleLogout = async () => {

@@ -9,7 +9,6 @@ import { CallApi, Endpoint, METHOD } from "../util/golfambit.api";
 
 export class GolfController {
 	public async GetCourses(req: Request, res: Response): Promise<void> {
-		console.error("Test:", req);
 		try {
 			const params = req.query as unknown as ICourseQueryParameters;
 
