@@ -1,7 +1,8 @@
 import React from 'react';
-import {Button, Text, View} from 'react-native';
+import {Button, View} from 'react-native';
 import {Logout} from '../utils/auth';
 import {NavigationProp, ParamListBase} from '@react-navigation/native';
+import LocationComponent from './location.search';
 
 interface IHomeProps {
   navigation: NavigationProp<ParamListBase>;
@@ -23,7 +24,7 @@ const HomeScreen: React.FC<IHomeProps> = ({navigation}) => {
 
   return (
     <View>
-      <Text>Home Screen</Text>
+      <LocationComponent />
       <Button title="Logout" onPress={handleLogout} />
     </View>
   );

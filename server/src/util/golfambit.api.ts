@@ -46,10 +46,11 @@ export async function CallApi({ endpoint, method = METHOD.GET, params }: APICall
 			error: null,
 		};
 	} catch (error) {
-		console.error("Error calling API from SERVER", error);
+		const apiError = error as APIError;
+		console.error("Error calling API from SERVER", apiError.response);
 		return {
 			data: null,
-			error,
+			error: apiError.response?.data || apiError.message,
 		};
 	}
 }
