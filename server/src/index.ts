@@ -15,7 +15,11 @@ app.use(express.json());
 app.use(cors());
 app.use("/auth", AuthRouter);
 app.use("/user", verifyToken, UserRouter);
-app.use("/golf", verifyToken, GolfRouter);
+app.use("/golf", GolfRouter);
+app.get("/idx", (req, res) => {
+	console.log("YEs from the index");
+	res.send("Work from the index");
+});
 
 app.listen(PORT, () => {
 	console.log(`Server listening on port ${PORT}`);

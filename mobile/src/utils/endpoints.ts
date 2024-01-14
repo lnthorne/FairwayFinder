@@ -3,16 +3,21 @@ import axios, {Method} from 'axios';
 // import {BASE_URL} from '@env';
 
 const baseURL = 'http://localhost:3000';
+const apiClient = axios.create({
+  baseURL,
+});
 
 export enum Endpoint {
   LOGIN = '/auth/login',
   LOGOUT = '/auth/logout',
   REGISTER = '/auth/register',
+  COURSES = '/golf/courses',
+  DETAILS = '/golf/courses/details',
 }
 
 export enum METHOD {
-  GET = 'GET',
-  POST = 'POST',
+  GET = 'get',
+  POST = 'post',
   DELETE = 'DELETE',
 }
 
@@ -38,29 +43,31 @@ export async function CallAPI({
   data = {},
   params = {},
 }: APICallProps) {
-  let token;
-  try {
-    token = await AsyncStorage.getItem(TOKEN_STORAGE);
-  } catch (e) {
-    console.error('Failed to fetch the token from storage:', e);
-  }
+  // let token;
+  // try {
+  //   token = await AsyncStorage.getItem(TOKEN_STORAGE);
+  // } catch (e) {
+  //   console.error('Failed to fetch the token from storage:', e);
+  // }
 
-  console.log('base', baseURL);
+  // console.log('PARAMS', params, 'TOKEN', token);
 
   try {
-    const response = await axios({
-      baseURL,
-      url: endpoint,
+    const response = await apiClient({
       method,
-      data,
+      url: endpoint,
+      // data,
       params,
-      headers: token ? {Authorization: `Bearer ${token}`} : undefined,
+      // headers: token ? {Authorization: `Bearer ${token}`} : undefined,
     });
+
+    console.log(response);
 
     return {data: response.data, error: null};
   } catch (error) {
     const apiError = error as APIError;
-    console.error('Error calling API', apiError.response);
+    console.error('Error calling API', apiError);
+    console.log('Fuck', baseURL, endpoint, params);
 
     return {
       data: null,
