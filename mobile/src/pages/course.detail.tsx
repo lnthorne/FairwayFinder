@@ -77,13 +77,13 @@ const CourseDetails: React.FC<ICourseDetailsProps> = ({
             <Text style={styles.link}>Visit Website</Text>
           </TouchableOpacity>
 
-          {/* {courseDetails.result.photos.map((photo, index) => (
+          {courseDetails.result.photos.map((photo, index) => (
             <Image
               key={index}
               source={{uri: `URL_FOR_PHOTO_API/${photo.photo_reference}`}} // Replace with actual URL
               style={styles.photo}
             />
-          ))} */}
+          ))}
         </>
       ) : (
         <Text>Course details not available.</Text> // In case no data is available

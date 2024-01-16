@@ -21,7 +21,13 @@ const App = () => {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="CourseDetails" component={CourseDetails} />
+        <Stack.Screen
+          name="CourseDetails"
+          component={CourseDetails}
+          options={{
+            headerLeft: undefined,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
