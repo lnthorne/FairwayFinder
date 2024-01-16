@@ -18,12 +18,20 @@ interface ICourseDetailsProps {
   route: any;
 }
 
+interface ICoursePhotos {
+  height: number;
+  html_attributions: string[];
+  photo_reference: string;
+  width: number;
+}
+
 const CourseDetails: React.FC<ICourseDetailsProps> = ({
   navigation,
   route,
 }: ICourseDetailsProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [courseDetails, setCoursDetails] = useState<ICourseDetails>();
+  const [photos, setPhotos] = useState<ICoursePhotos[]>([]);
 
   const {name, zip} = route.params;
 
@@ -40,8 +48,9 @@ const CourseDetails: React.FC<ICourseDetailsProps> = ({
           },
         });
 
-        console.log(response.data.course_details);
+        console.log(response.data.course_details.result.photos);
         setCoursDetails(response.data.course_details);
+        setPhotos(response.data.course_details.result.photos);
         setIsLoading(false);
       } catch (error) {
         console.error('Error fetching course details', error);
@@ -77,10 +86,12 @@ const CourseDetails: React.FC<ICourseDetailsProps> = ({
             <Text style={styles.link}>Visit Website</Text>
           </TouchableOpacity>
 
-          {courseDetails.result.photos.map((photo, index) => (
+          {photos.map((photo, index) => (
             <Image
               key={index}
-              source={{uri: `URL_FOR_PHOTO_API/${photo.photo_reference}`}} // Replace with actual URL
+              source={{
+                uri: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photo_reference}&key=AIzaSyAy8qGg1ugtN8ayOuiJkedoIVKDU_1Xjs4`,
+              }} // Replace with actual URL construction logic
               style={styles.photo}
             />
           ))}
