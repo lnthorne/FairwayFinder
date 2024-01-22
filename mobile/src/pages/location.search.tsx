@@ -6,6 +6,7 @@ import Config from 'react-native-config';
 import {GetCourses} from '../utils/api';
 import CourseCard from './course.card';
 import {NavigationProp} from '@react-navigation/native';
+import {ICourse} from '@interfaces/course.type';
 
 // Initialize Geocoder
 Geocoder.init('AIzaSyAy8qGg1ugtN8ayOuiJkedoIVKDU_1Xjs4'); // use a valid API key
@@ -46,7 +47,7 @@ const LocationComponent = ({navigation}: ILocationProps) => {
   };
 
   return (
-    <View>
+    <View style={{flex: 1}}>
       <TextInput
         placeholder="Enter location"
         value={location}
@@ -64,7 +65,9 @@ const LocationComponent = ({navigation}: ILocationProps) => {
 
       <FlatList
         data={courses}
-        keyExtractor={(item, index) => `${item.name}-${item.zip_code}-${index}`}
+        keyExtractor={(item: ICourse, index) =>
+          `${item.name}-${item.zip_code}-${index}`
+        }
         renderItem={({item}) => (
           <CourseCard
             course={item}

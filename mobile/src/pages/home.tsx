@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, View} from 'react-native';
+import {Button, StyleSheet, View} from 'react-native';
 import {Logout} from '../utils/auth';
 import {NavigationProp, ParamListBase} from '@react-navigation/native';
 import LocationComponent from './location.search';
@@ -23,11 +23,17 @@ const HomeScreen: React.FC<IHomeProps> = ({navigation}) => {
   };
 
   return (
-    <View>
+    <View style={styles.view}>
       <LocationComponent navigation={navigation} />
       <Button title="Logout" onPress={handleLogout} />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  view: {
+    flex: 1,
+  },
+});
 
 export default HomeScreen;
