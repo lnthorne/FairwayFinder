@@ -28,8 +28,8 @@ This app enables users to search and filter golf tee times. It's a React Native 
 ### Running the Application
 
 1. **Start the Backend Server**
-   a. cd into the `server` directory
-   b. run `docker build -t fairway-finder .`
-   c. run `docker run -p 3000:3000 fairway-finder`
+   a. cd into the `server` directory \n
+   b. run `docker build -t fairway-finder .` \n
+   c. run `docker run -p 3000:3000 fairway-finder` \n
 
 2. **Run the React Native App**
