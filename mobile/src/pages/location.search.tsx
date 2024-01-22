@@ -47,7 +47,7 @@ const LocationComponent = ({navigation}: ILocationProps) => {
   };
 
   return (
-    <View style={{flex: 1}}>
+    <View>
       <TextInput
         placeholder="Enter location"
         value={location}
