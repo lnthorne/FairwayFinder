@@ -19,7 +19,7 @@ export class GolfController {
 			});
 
 			if (response.error === null) {
-				res.status(200).json(response);
+				res.status(200).json(response.data);
 				return;
 			}
 
@@ -33,7 +33,6 @@ export class GolfController {
 	public async getCourseDetails(req: Request, res: Response): Promise<void> {
 		try {
 			const params = req.query as unknown as ICourseDetailsQueryParameters;
-			console.log(params);
 
 			const response = await CallApi({
 				endpoint: Endpoint.DETAILS,
@@ -42,7 +41,7 @@ export class GolfController {
 			});
 
 			if (response.error === null) {
-				res.status(200).json(response);
+				res.status(200).json(response.data);
 				return;
 			}
 

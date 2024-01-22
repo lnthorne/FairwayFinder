@@ -6,6 +6,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {RootStackParamList} from './utils/types/naviagtion.types';
 import 'react-native-screens';
+import CourseDetails from './pages/course.detail';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -20,6 +21,13 @@ const App = () => {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen
+          name="CourseDetails"
+          component={CourseDetails}
+          options={{
+            headerLeft: undefined,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

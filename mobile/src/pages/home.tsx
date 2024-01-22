@@ -24,7 +24,7 @@ const HomeScreen: React.FC<IHomeProps> = ({navigation}) => {
 
   return (
     <View>
-      <LocationComponent />
+      <LocationComponent navigation={navigation} />
       <Button title="Logout" onPress={handleLogout} />
     </View>
   );

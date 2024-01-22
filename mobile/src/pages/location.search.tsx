@@ -5,11 +5,16 @@ import Geocoder from 'react-native-geocoding';
 import Config from 'react-native-config';
 import {GetCourses} from '../utils/api';
 import CourseCard from './course.card';
+import {NavigationProp} from '@react-navigation/native';
 
 // Initialize Geocoder
-Geocoder.init(''); // use a valid API key
+Geocoder.init('AIzaSyAy8qGg1ugtN8ayOuiJkedoIVKDU_1Xjs4'); // use a valid API key
 
-const LocationComponent = () => {
+interface ILocationProps {
+  navigation: NavigationProp<any>;
+}
+
+const LocationComponent = ({navigation}: ILocationProps) => {
   const [location, setLocation] = useState('');
   const [courses, setCourses] = useState([]);
   const [radius, setRadius] = useState(5);
@@ -25,8 +30,8 @@ const LocationComponent = () => {
         lng: lng.toString(),
       });
 
-      setCourses(courseData.data.courses);
-      console.log(courseData.data.courses);
+      setCourses(courseData.courses);
+      console.log(courseData.courses);
     } catch (error) {
       console.error(error);
     }
@@ -34,6 +39,10 @@ const LocationComponent = () => {
 
   const handleCourseCardPress = (name: string, zip_code: string) => {
     console.log(name, zip_code);
+    navigation.navigate('CourseDetails', {
+      name,
+      zip: zip_code,
+    });
   };
 
   return (
@@ -55,7 +64,7 @@ const LocationComponent = () => {
 
       <FlatList
         data={courses}
-        keyExtractor={item => item.name}
+        keyExtractor={(item, index) => `${item.name}-${item.zip_code}-${index}`}
         renderItem={({item}) => (
           <CourseCard
             course={item}
