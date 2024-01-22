@@ -3,6 +3,7 @@ export interface ICoursesResponse {
 }
 
 export interface ICourse {
+	id: string;
 	name: string;
 	zip_code: string;
 	distance: number;

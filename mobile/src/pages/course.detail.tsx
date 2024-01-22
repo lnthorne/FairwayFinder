@@ -32,6 +32,7 @@ const CourseDetails: React.FC<ICourseDetailsProps> = ({
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [courseDetails, setCoursDetails] = useState<ICourseDetails>();
   const [photos, setPhotos] = useState<ICoursePhotos[]>([]);
+  const [dropDownOpen, setDropDownOpen] = useState<boolean>(false);
 
   const {name, zip} = route.params;
 
@@ -48,7 +49,7 @@ const CourseDetails: React.FC<ICourseDetailsProps> = ({
           },
         });
 
-        console.log(response.data.course_details.result.photos);
+        console.log(response.data.course_details.result);
         setCoursDetails(response.data.course_details);
         setPhotos(response.data.course_details.result.photos);
         setIsLoading(false);
@@ -72,6 +73,30 @@ const CourseDetails: React.FC<ICourseDetailsProps> = ({
       ) : courseDetails ? (
         <>
           <Text style={styles.title}>{courseDetails.result.name}</Text>
+          <TouchableOpacity
+            onPress={() => {
+              setDropDownOpen(!dropDownOpen);
+            }}
+            style={styles.detail}>
+            <Text>
+              {`Hours: ${
+                courseDetails.result.opening_hours.open_now
+                  ? 'Open Now'
+                  : 'Closed'
+              }`}
+            </Text>
+          </TouchableOpacity>
+          {dropDownOpen && (
+            <View style={styles.dropdownContent}>
+              {courseDetails.result.opening_hours.weekday_text.map(
+                (hours, index) => (
+                  <Text key={index} style={styles.hoursText}>
+                    {hours}
+                  </Text>
+                ),
+              )}
+            </View>
+          )}
           <Text style={styles.detail}>
             {courseDetails.result.formatted_address}
           </Text>
@@ -91,7 +116,7 @@ const CourseDetails: React.FC<ICourseDetailsProps> = ({
               key={index}
               source={{
                 uri: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photo_reference}&key=AIzaSyAy8qGg1ugtN8ayOuiJkedoIVKDU_1Xjs4`,
-              }} // Replace with actual URL construction logic
+              }}
               style={styles.photo}
             />
           ))}
@@ -128,6 +153,15 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     marginBottom: 10,
   },
+
+  dropdownToggle: {
+    padding: 10,
+    backgroundColor: '#f0f0f0',
+  },
+  dropdownContent: {
+    padding: 10,
+  },
+  hoursText: {},
 });
 
 export default CourseDetails;

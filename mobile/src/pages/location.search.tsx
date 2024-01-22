@@ -64,7 +64,7 @@ const LocationComponent = ({navigation}: ILocationProps) => {
 
       <FlatList
         data={courses}
-        keyExtractor={item => item.name}
+        keyExtractor={(item, index) => `${item.name}-${item.zip_code}-${index}`}
         renderItem={({item}) => (
           <CourseCard
             course={item}
